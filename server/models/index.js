@@ -6,7 +6,7 @@ module.exports = {
       // fetch all messages
       // id, text, roomname and username
       var queryStr =
-        'select messages.id, messages.text, messages.roomname from messages \
+        'select messages.id, messages.text, messages.roomname, users.username from messages \
          left outer join users on (messages.userid = users.id) \
          order by messages.id desc';
       db.query(queryStr, function(err, results) {
@@ -14,7 +14,7 @@ module.exports = {
       });
     },
     post: function (params, callback) {
-      // fetch all users
+      // create a message
       var queryStr =
         'insert into messsages(text, userid, roomname) \
          values (?, (select id from users where username = ? limit 1), ?)';
