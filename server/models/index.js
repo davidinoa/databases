@@ -2,8 +2,26 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {},
-    post: function () {}
+    get: function (callback) {
+      // fetch all messages
+      // id, text, roomname and username
+      var queryStr =
+        'select messages.id, messages.text, messages.roomname from messages \
+         left outer join users on (messages.userid = users.id) \
+         order by messages.id desc';
+      db.query(queryStr, function(err, results) {
+        callback(results);
+      });
+    },
+    post: function (params, callback) {
+      // fetch all users
+      var queryStr =
+        'insert into messsages(text, userid, roomname) \
+         values (?, (select id from users where username = ? limit 1), ?)';
+      db.query(queryStr, params, function(err, result) {
+        callback(results);
+      });
+    }
   },
 
   users: {
