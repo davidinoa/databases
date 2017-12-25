@@ -38,3 +38,4 @@ bower_components/
 client/.DS_Store
 client/.bowerrc
 package-lock.json
+package.json
