@@ -3,7 +3,7 @@ var app = {
   server: 'http://127.0.0.1:3000/classes/messages',
 
   init: function() {
-    app.username = 'anonymous';
+    app.username = 'dave';
 
     app.onscreenMessages = {};
 
@@ -19,8 +19,9 @@ var app = {
     e.preventDefault();
 
     var message = {
-      username: app.username,
       text: app.$text.val(),
+      username: app.username,
+      roomname: 'lobby'
     };
 
     app.$text.val('');

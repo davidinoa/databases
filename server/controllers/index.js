@@ -12,36 +12,37 @@ module.exports = {
   messages: {
     get: function (req, res) {
       models.messages.get(function(err, results) {
-        res.writeHead(200, headers);
-        res.json(results);
+        res.set(headers);
+        res.json({results: results});
       });
     },
     post: function (req, res) {
+      console.log('****************************', req.body);
       var params = [
-        req.body[text],
-        req.body[username],
-        req.body[roomname]
+        req.body['text'],
+        req.body['username'],
+        req.body['roomname']
       ];
 
       models.messages.post(params, function(err, results) {
-        res.writeHead(200, headers);
+        res.set(headers);
         res.json(results);
       });
     },
     options: function(req, res) {
-      res.writeHead(200, headers);
+      res.set(headers);
       res.end(null);
     }
   },
 
   users: {
     get: function (req, res) {
-      model.users.get(function(err, results) {
+      models.users.get(function(err, results) {
         res.json(results);
       });
     },
     post: function (req, res) {
-      var params = [ req.body[username] ];
+      var params = [ req.body['username'] ];
 
       models.messages.post(params, function(err, results) {
         res.json(results);
